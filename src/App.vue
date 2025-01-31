@@ -1,6 +1,5 @@
 <template>
   <div class="app">
-    <h1>大富翁银行</h1>
     <Calculator />
   </div>
 </template>

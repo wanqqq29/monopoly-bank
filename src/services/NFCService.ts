@@ -1,3 +1,9 @@
+declare class NDEFReader {
+  scan(): Promise<void>;
+  addEventListener(type: string, callback: Function, options?: object): void;
+}
+
+
 export interface Transaction {
   from: string;
   to: string;
