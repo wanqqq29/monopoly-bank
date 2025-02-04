@@ -26,6 +26,7 @@ export class NFCService {
     if (!('NDEFReader' in window)) {
       throw new Error('此设备不支持NFC功能');
     }
+    
     this.reader = new NDEFReader();
     this.permissionPromise = this.initializePermission();
   }
