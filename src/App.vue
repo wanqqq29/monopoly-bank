@@ -6,6 +6,17 @@
 
 <script setup lang="ts">
 import Calculator from './components/Calculator.vue'
+import { onMounted } from 'vue'
+import { nfcService } from './services/NFCService'
+
+// 在组件挂载时请求权限
+onMounted(async () => {
+  try {
+    await nfcService.requestPermission();
+  } catch (error) {
+    console.error('NFC 权限请求失败:', error);
+  }
+})
 </script>
 
 <style>

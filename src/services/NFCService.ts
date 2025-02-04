@@ -28,6 +28,16 @@ export class NFCService {
     this.reader = new NDEFReader();
   }
 
+  async requestPermission(): Promise<void> {
+    try {
+      await this.reader.scan();
+      console.log('NFC 权限已获取');
+    } catch (error) {
+      console.error('无法获取 NFC 权限:', error);
+      throw error;
+    }
+  }
+
   async startScanning(): Promise<void> {
     if (this.isScanning) return;
     
@@ -66,3 +76,5 @@ export class NFCService {
     }
   }
 }
+
+export const nfcService = new NFCService();
