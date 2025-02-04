@@ -9,10 +9,10 @@ import Calculator from './components/Calculator.vue'
 import { onMounted } from 'vue'
 import { nfcService } from './services/NFCService'
 
-// 在组件挂载时请求权限
+// 在组件挂载时等待权限初始化完成
 onMounted(async () => {
   try {
-    await nfcService.requestPermission();
+    await nfcService.waitForPermission();
   } catch (error) {
     console.error('NFC 权限请求失败:', error);
   }

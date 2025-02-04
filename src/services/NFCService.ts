@@ -20,15 +20,17 @@ export class NFCService {
   private reader: any;
   private isScanning: boolean = false;
   private operationInProgress: boolean = false;
+  private permissionPromise: Promise<void>;
 
   constructor() {
     if (!('NDEFReader' in window)) {
       throw new Error('此设备不支持NFC功能');
     }
     this.reader = new NDEFReader();
+    this.permissionPromise = this.initializePermission();
   }
 
-  async requestPermission(): Promise<void> {
+  private async initializePermission(): Promise<void> {
     try {
       await this.reader.scan();
       console.log('NFC 权限已获取');
@@ -36,6 +38,10 @@ export class NFCService {
       console.error('无法获取 NFC 权限:', error);
       throw error;
     }
+  }
+
+  async waitForPermission(): Promise<void> {
+    return this.permissionPromise;
   }
 
   async startScanning(): Promise<void> {
